@@ -71,4 +71,6 @@ class FavoriteListAdapter(private val mobileList: MutableList<MobileListResponse
         mobileList.removeAt(position)
         notifyDataSetChanged()
     }
+
+    fun getItem(position: Int) = mobileList[position]
 }

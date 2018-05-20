@@ -72,4 +72,8 @@ class MobileListFragment : BaseFragment(), MobileListContract.View, MobileListAd
             return MobileListFragment()
         }
     }
+
+    fun clearFavorite(item: MobileListResponse) {
+        (recyclerView.adapter as MobileListAdapter).clearFavorite(item)
+    }
 }

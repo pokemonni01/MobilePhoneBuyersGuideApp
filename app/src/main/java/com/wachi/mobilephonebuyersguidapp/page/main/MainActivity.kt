@@ -42,7 +42,7 @@ class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInte
 
     }
 
-    override fun onFragmentInteraction(uri: Uri) {
-
+    override fun onRemoveFavoriteItem(item: MobileListResponse) {
+        mobileListFragment.clearFavorite(item)
     }
 }

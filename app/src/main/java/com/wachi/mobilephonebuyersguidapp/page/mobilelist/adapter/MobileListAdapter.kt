@@ -60,4 +60,14 @@ class MobileListAdapter(private val listener: MobileListAdapterListener, private
         fun onFavoriteClick(item: MobileListResponse, isFavorite: Boolean)
         fun onItemClick(item: MobileListResponse)
     }
+
+    fun clearFavorite(item: MobileListResponse) {
+        mobileList.forEachIndexed { index, mobileListResponse ->
+            if ( mobileListResponse.id == item.id ) {
+                mobileListResponse.isFavorite = false
+                notifyItemChanged(index)
+                return
+            }
+        }
+    }
 }

@@ -1,7 +1,6 @@
 package com.wachi.mobilephonebuyersguidapp.page.favoritelist
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -38,6 +37,7 @@ class FavoriteListFragment : BaseFragment() {
             val swipeHandler = object : SwipeToDeleteCallback(this@run) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
                     viewHolder?.run {
+                        mListener?.onRemoveFavoriteItem((recyclerView.adapter as FavoriteListAdapter).getItem(viewHolder.adapterPosition))
                         (recyclerView.adapter as FavoriteListAdapter).removeAt(viewHolder.adapterPosition)
                     }
                 }
@@ -63,7 +63,7 @@ class FavoriteListFragment : BaseFragment() {
     }
 
     interface OnFavoriteListFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
+        fun onRemoveFavoriteItem(item: MobileListResponse)
     }
 
     companion object {
