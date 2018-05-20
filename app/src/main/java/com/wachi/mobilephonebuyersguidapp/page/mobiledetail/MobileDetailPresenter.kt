@@ -1,5 +1,7 @@
 package com.wachi.mobilephonebuyersguidapp.page.mobiledetail
 
+import com.wachi.mobilephonebuyersguidapp.model.MobileListAPI
+import com.wachi.mobilephonebuyersguidapp.model.mobileimagelist.MobileImageListResponse
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
 
 /**
@@ -8,17 +10,20 @@ import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListRes
 class MobileDetailPresenter : MobileDetailContract.Presenter() {
 
     var item: MobileListResponse? = null
+    private val mModel = MobileListAPI()
 
     private fun Double.toStringTwoDigits() = String.format("%.2f", this)
 
     override fun onViewCreate() {
         mView?.run {
+            hideRootView()
             item?.let {
-                setRating(it.rating?.toStringTwoDigits() ?:"0.0")
-                setPrice(it.price?.toStringTwoDigits() ?:"0.0")
-                setMobileName(it.name ?:"")
-                setMobileBrand(it.brand ?:"")
-                setMobileDescription(it.description ?:"")
+                setRating(it.rating!!.toStringTwoDigits())
+                setPrice(it.price!!.toStringTwoDigits())
+                setMobileName(it.name!!)
+                setMobileBrand(it.brand!!)
+                setMobileDescription(it.description!!)
+                requestMobileImageList(it.id!!)
             }
         }
     }
@@ -28,10 +33,23 @@ class MobileDetailPresenter : MobileDetailContract.Presenter() {
     }
 
     override fun clear() {
-
+        mModel.clear()
     }
 
     override fun requestMobileImageList(mobileId: Int) {
+        mView?.showProgress()
+        mModel.getMobileImageList(this@MobileDetailPresenter, mobileId)
+    }
 
+    override fun onGetMobileImageListSuccess(response: List<MobileImageListResponse>) {
+        mView?.run {
+            hideProgress()
+            showRootView()
+            setMobileImageList(response)
+        }
+    }
+
+    override fun onGetMobileImageListFail(throwable: Throwable) {
+        mView?.hideProgress()
     }
 }

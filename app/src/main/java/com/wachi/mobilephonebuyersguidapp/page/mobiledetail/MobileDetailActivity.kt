@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import com.wachi.mobilephonebuyersguidapp.R
 import com.wachi.mobilephonebuyersguidapp.base.BaseActivity
+import com.wachi.mobilephonebuyersguidapp.model.mobileimagelist.MobileImageListResponse
 import com.wachi.mobilephonebuyersguidapp.page.main.MainActivity
+import com.wachi.mobilephonebuyersguidapp.page.mobiledetail.adapter.MobileImageAdapter
 import kotlinx.android.synthetic.main.activity_mobile_detail.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
@@ -28,6 +30,10 @@ class MobileDetailActivity : BaseActivity(), MobileDetailContract.View {
         mPresenter.onViewDestroy()
     }
 
+    override fun setMobileImageList(mobileImageList: List<MobileImageListResponse>) {
+         pager.adapter = MobileImageAdapter(mobileImageList)
+    }
+
     override fun getLayout() = R.layout.activity_mobile_detail
 
     override fun setRating(text: String) {
@@ -48,5 +54,13 @@ class MobileDetailActivity : BaseActivity(), MobileDetailContract.View {
 
     override fun setMobileDescription(text: String) {
         tvMobileDescription.text = text
+    }
+
+    override fun showRootView() {
+        rootView.visibility = View.VISIBLE
+    }
+
+    override fun hideRootView() {
+        rootView.visibility = View.GONE
     }
 }
