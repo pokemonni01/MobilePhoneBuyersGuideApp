@@ -8,8 +8,6 @@ import android.support.annotation.StringRes
 interface BaseView {
     fun hideProgress()
     fun showProgress()
-    fun hideKeyboard()
-    fun showKeyboard()
     fun showDefaultAlertDialog(title: String , message: String)
     fun showDefaultAlertDialog(@StringRes title: Int, @StringRes message: Int)
 }

@@ -42,16 +42,4 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     override fun showDefaultAlertDialog(@StringRes title: Int, @StringRes message: Int) {
         showDefaultAlertDialog(getString(title), getString(message))
     }
-
-    override fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (currentFocus != null) {
-            imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
-        }
-    }
-
-    override fun showKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-    }
 }
