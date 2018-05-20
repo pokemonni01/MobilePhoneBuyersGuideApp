@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import com.wachi.mobilephonebuyersguidapp.R
 import com.wachi.mobilephonebuyersguidapp.base.BaseFragment
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
 import com.wachi.mobilephonebuyersguidapp.page.favoritelist.adapter.FavoriteListAdapter
+import com.wachi.mobilephonebuyersguidapp.page.favoritelist.adapter.callback.SwipeToDeleteCallback
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
 
 class FavoriteListFragment : BaseFragment() {
@@ -31,6 +34,17 @@ class FavoriteListFragment : BaseFragment() {
                 layoutManager = LinearLayoutManager(this@run)
                 this.adapter = FavoriteListAdapter(mutableListOf())
             }
+
+            val swipeHandler = object : SwipeToDeleteCallback(this@run) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                    viewHolder?.run {
+                        (recyclerView.adapter as FavoriteListAdapter).removeAt(viewHolder.adapterPosition)
+                    }
+                }
+
+            }
+            val itemTouchHelper = ItemTouchHelper(swipeHandler)
+            itemTouchHelper.attachToRecyclerView(recyclerView)
         }
     }
 
