@@ -18,8 +18,9 @@ import kotlinx.android.synthetic.main.fragment_favorite_list.*
 
 class FavoriteListFragment : BaseFragment() {
 
-
     private var mListener: OnFavoriteListFragmentInteractionListener? = null
+
+    private var mCurrentSort = SortingDialogFragment.Sorting.NONE
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -75,13 +76,16 @@ class FavoriteListFragment : BaseFragment() {
 
     fun addFavoriteItem(item: MobileListResponse) {
         (recyclerView.adapter as FavoriteListAdapter).addItem(item)
+        sortList(mCurrentSort)
     }
 
     fun removeFavoriteItem(item: MobileListResponse) {
         (recyclerView.adapter as FavoriteListAdapter).removeItem(item)
+        sortList(mCurrentSort)
     }
 
     fun sortList(sorting: SortingDialogFragment.Sorting) {
+        mCurrentSort = sorting
         when(sorting) {
             SortingDialogFragment.Sorting.PRICELOWTOHIGH -> (recyclerView.adapter as FavoriteListAdapter).sortPriceLowToHigh()
             SortingDialogFragment.Sorting.PRICEHIGHTOLOW -> (recyclerView.adapter as FavoriteListAdapter).sortPriceHighToLow()

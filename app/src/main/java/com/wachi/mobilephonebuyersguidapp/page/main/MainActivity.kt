@@ -21,7 +21,6 @@ class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInte
     }
 
     private val mMobileListSortingDialog = SortingDialogFragment.newInstance()
-    private val mFavoriteListSortingDialog = SortingDialogFragment.newInstance()
 
     private val mobileListFragment = MobileListFragment.newInstance()
     private val favoriteListFragment = FavoriteListFragment.newInstance()
@@ -39,14 +38,7 @@ class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInte
     }
 
     private fun showSortingDialog() {
-        when(pager.currentItem) {
-            0 -> {
-                mMobileListSortingDialog.show(supportFragmentManager, "Mobile List Sorting Dialog")
-            }
-            1 -> {
-                mFavoriteListSortingDialog.show(supportFragmentManager, "Favorite List Sorting Dialog")
-            }
-        }
+        mMobileListSortingDialog.show(supportFragmentManager, "Mobile List Sorting Dialog")
     }
 
     override fun getLayout() = R.layout.activity_main
@@ -70,35 +62,20 @@ class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInte
     }
 
     override fun onSelectSorting(sorting: SortingDialogFragment.Sorting, dialog: SortingDialogFragment) {
-        when(dialog) {
-            mMobileListSortingDialog -> {
-                when(sorting) {
-                    SortingDialogFragment.Sorting.PRICEHIGHTOLOW -> {
-                        mobileListFragment.sortList(SortingDialogFragment.Sorting.PRICEHIGHTOLOW)
-                    }
-                    SortingDialogFragment.Sorting.PRICELOWTOHIGH -> {
-                        mobileListFragment.sortList(SortingDialogFragment.Sorting.PRICELOWTOHIGH)
-                    }
-                    SortingDialogFragment.Sorting.RATING -> {
-                        mobileListFragment.sortList(SortingDialogFragment.Sorting.RATING)
-                    }
-                    else -> { }
-                }
+        when(sorting) {
+            SortingDialogFragment.Sorting.PRICEHIGHTOLOW -> {
+                mobileListFragment.sortList(SortingDialogFragment.Sorting.PRICEHIGHTOLOW)
+                favoriteListFragment.sortList(SortingDialogFragment.Sorting.PRICEHIGHTOLOW)
             }
-            mFavoriteListSortingDialog -> {
-                when(sorting) {
-                    SortingDialogFragment.Sorting.PRICEHIGHTOLOW -> {
-                        favoriteListFragment.sortList(SortingDialogFragment.Sorting.PRICEHIGHTOLOW)
-                    }
-                    SortingDialogFragment.Sorting.PRICELOWTOHIGH -> {
-                        favoriteListFragment.sortList(SortingDialogFragment.Sorting.PRICELOWTOHIGH)
-                    }
-                    SortingDialogFragment.Sorting.RATING -> {
-                        favoriteListFragment.sortList(SortingDialogFragment.Sorting.RATING)
-                    }
-                    else -> { }
-                }
+            SortingDialogFragment.Sorting.PRICELOWTOHIGH -> {
+                mobileListFragment.sortList(SortingDialogFragment.Sorting.PRICELOWTOHIGH)
+                favoriteListFragment.sortList(SortingDialogFragment.Sorting.PRICELOWTOHIGH)
             }
+            SortingDialogFragment.Sorting.RATING -> {
+                mobileListFragment.sortList(SortingDialogFragment.Sorting.RATING)
+                favoriteListFragment.sortList(SortingDialogFragment.Sorting.RATING)
+            }
+            else -> { }
         }
     }
 }
