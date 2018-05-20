@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.list_mobile.view.*
 /**
  * Created by WachiGO on 20/5/2018 AD
  */
-class FavoriteListAdapter(private var mobileList: MutableList<MobileListResponse>) : RecyclerView.Adapter<FavoriteListAdapter.ViewHolder>() {
+class FavoriteListAdapter(private val listener: FavoriteListAdapterListener, private var mobileList: MutableList<MobileListResponse>) : RecyclerView.Adapter<FavoriteListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_mobile, parent, false)
@@ -43,7 +43,14 @@ class FavoriteListAdapter(private var mobileList: MutableList<MobileListResponse
                 ivFavorite.setImageResource(R.drawable.ic_star_border_black)
             }
             ivFavorite.visibility = View.GONE
+            itemView.setOnClickListener {
+                listener.onItemClick(item)
+            }
         }
+    }
+
+    interface FavoriteListAdapterListener {
+        fun onItemClick(item: MobileListResponse)
     }
 
     fun addItem(item: MobileListResponse) {
