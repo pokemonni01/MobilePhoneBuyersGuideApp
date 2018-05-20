@@ -8,11 +8,14 @@ import com.wachi.mobilephonebuyersguidapp.GlideApp
 import com.wachi.mobilephonebuyersguidapp.R
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
 import kotlinx.android.synthetic.main.list_mobile.view.*
+import android.R.attr.data
+import java.util.*
+
 
 /**
  * Created by WachiGO on 20/5/2018 AD
  */
-class MobileListAdapter(private val listener: MobileListAdapterListener, private val mobileList: List<MobileListResponse>) : RecyclerView.Adapter<MobileListAdapter.ViewHolder>() {
+class MobileListAdapter(private val listener: MobileListAdapterListener, private var mobileList: List<MobileListResponse>) : RecyclerView.Adapter<MobileListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_mobile, parent, false)
@@ -69,5 +72,20 @@ class MobileListAdapter(private val listener: MobileListAdapterListener, private
                 return
             }
         }
+    }
+
+    fun sortPriceLowToHigh() {
+        mobileList = mobileList.sortedBy { it.price }
+        notifyDataSetChanged()
+    }
+
+    fun sortPriceHighToLow() {
+        mobileList = mobileList.sortedByDescending { it.price }
+        notifyDataSetChanged()
+    }
+
+    fun sortRating() {
+        mobileList = mobileList.sortedByDescending { it.rating }
+        notifyDataSetChanged()
     }
 }

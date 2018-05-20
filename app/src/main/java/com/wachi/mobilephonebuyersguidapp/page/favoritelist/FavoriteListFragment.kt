@@ -13,6 +13,7 @@ import com.wachi.mobilephonebuyersguidapp.base.BaseFragment
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
 import com.wachi.mobilephonebuyersguidapp.page.favoritelist.adapter.FavoriteListAdapter
 import com.wachi.mobilephonebuyersguidapp.page.favoritelist.adapter.callback.SwipeToDeleteCallback
+import com.wachi.mobilephonebuyersguidapp.page.main.sortingdialog.SortingDialogFragment
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
 
 class FavoriteListFragment : BaseFragment() {
@@ -78,5 +79,14 @@ class FavoriteListFragment : BaseFragment() {
 
     fun removeFavoriteItem(item: MobileListResponse) {
         (recyclerView.adapter as FavoriteListAdapter).removeItem(item)
+    }
+
+    fun sortList(sorting: SortingDialogFragment.Sorting) {
+        when(sorting) {
+            SortingDialogFragment.Sorting.PRICELOWTOHIGH -> (recyclerView.adapter as FavoriteListAdapter).sortPriceLowToHigh()
+            SortingDialogFragment.Sorting.PRICEHIGHTOLOW -> (recyclerView.adapter as FavoriteListAdapter).sortPriceHighToLow()
+            SortingDialogFragment.Sorting.RATING -> (recyclerView.adapter as FavoriteListAdapter).sortRating()
+            SortingDialogFragment.Sorting.NONE -> {}
+        }
     }
 }

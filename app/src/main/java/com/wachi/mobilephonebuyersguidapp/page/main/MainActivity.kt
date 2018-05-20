@@ -8,16 +8,20 @@ import com.wachi.mobilephonebuyersguidapp.base.BaseActivity
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
 import com.wachi.mobilephonebuyersguidapp.page.favoritelist.FavoriteListFragment
 import com.wachi.mobilephonebuyersguidapp.page.main.adapter.PageAdapter
+import com.wachi.mobilephonebuyersguidapp.page.main.sortingdialog.SortingDialogFragment
 import com.wachi.mobilephonebuyersguidapp.page.mobiledetail.MobileDetailActivity
 import com.wachi.mobilephonebuyersguidapp.page.mobilelist.MobileListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
-class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInteractionListener, FavoriteListFragment.OnFavoriteListFragmentInteractionListener {
+class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInteractionListener, FavoriteListFragment.OnFavoriteListFragmentInteractionListener, SortingDialogFragment.SortingDialogListener {
 
     companion object {
         const val MOBILE_ITEM_KEY = "mobile_item"
     }
+
+    private val mMobileListSortingDialog = SortingDialogFragment.newInstance()
+    private val mFavoriteListSortingDialog = SortingDialogFragment.newInstance()
 
     private val mobileListFragment = MobileListFragment.newInstance()
     private val favoriteListFragment = FavoriteListFragment.newInstance()
@@ -29,8 +33,20 @@ class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInte
 
     private fun setView() {
         toolbar.toolbarBack.visibility = View.GONE
+        toolbar.toolbarSort.setOnClickListener { showSortingDialog() }
         val fragmentList = listOf(mobileListFragment, favoriteListFragment)
         pager.adapter = PageAdapter(fragmentList, supportFragmentManager)
+    }
+
+    private fun showSortingDialog() {
+        when(pager.currentItem) {
+            0 -> {
+                mMobileListSortingDialog.show(supportFragmentManager, "Mobile List Sorting Dialog")
+            }
+            1 -> {
+                mFavoriteListSortingDialog.show(supportFragmentManager, "Favorite List Sorting Dialog")
+            }
+        }
     }
 
     override fun getLayout() = R.layout.activity_main
@@ -51,5 +67,38 @@ class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInte
 
     override fun onRemoveFavoriteItem(item: MobileListResponse) {
         mobileListFragment.clearFavorite(item)
+    }
+
+    override fun onSelectSorting(sorting: SortingDialogFragment.Sorting, dialog: SortingDialogFragment) {
+        when(dialog) {
+            mMobileListSortingDialog -> {
+                when(sorting) {
+                    SortingDialogFragment.Sorting.PRICEHIGHTOLOW -> {
+                        mobileListFragment.sortList(SortingDialogFragment.Sorting.PRICEHIGHTOLOW)
+                    }
+                    SortingDialogFragment.Sorting.PRICELOWTOHIGH -> {
+                        mobileListFragment.sortList(SortingDialogFragment.Sorting.PRICELOWTOHIGH)
+                    }
+                    SortingDialogFragment.Sorting.RATING -> {
+                        mobileListFragment.sortList(SortingDialogFragment.Sorting.RATING)
+                    }
+                    else -> { }
+                }
+            }
+            mFavoriteListSortingDialog -> {
+                when(sorting) {
+                    SortingDialogFragment.Sorting.PRICEHIGHTOLOW -> {
+                        favoriteListFragment.sortList(SortingDialogFragment.Sorting.PRICEHIGHTOLOW)
+                    }
+                    SortingDialogFragment.Sorting.PRICELOWTOHIGH -> {
+                        favoriteListFragment.sortList(SortingDialogFragment.Sorting.PRICELOWTOHIGH)
+                    }
+                    SortingDialogFragment.Sorting.RATING -> {
+                        favoriteListFragment.sortList(SortingDialogFragment.Sorting.RATING)
+                    }
+                    else -> { }
+                }
+            }
+        }
     }
 }

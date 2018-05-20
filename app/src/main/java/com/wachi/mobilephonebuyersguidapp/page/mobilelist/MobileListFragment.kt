@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.wachi.mobilephonebuyersguidapp.R
 import com.wachi.mobilephonebuyersguidapp.base.BaseFragment
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
+import com.wachi.mobilephonebuyersguidapp.page.main.sortingdialog.SortingDialogFragment
 import com.wachi.mobilephonebuyersguidapp.page.mobilelist.adapter.MobileListAdapter
 import kotlinx.android.synthetic.main.fragment_mobile_list.*
 
@@ -75,5 +76,14 @@ class MobileListFragment : BaseFragment(), MobileListContract.View, MobileListAd
 
     fun clearFavorite(item: MobileListResponse) {
         (recyclerView.adapter as MobileListAdapter).clearFavorite(item)
+    }
+
+    fun sortList(sorting: SortingDialogFragment.Sorting) {
+        when(sorting) {
+            SortingDialogFragment.Sorting.PRICELOWTOHIGH -> (recyclerView.adapter as MobileListAdapter).sortPriceLowToHigh()
+            SortingDialogFragment.Sorting.PRICEHIGHTOLOW -> (recyclerView.adapter as MobileListAdapter).sortPriceHighToLow()
+            SortingDialogFragment.Sorting.RATING -> (recyclerView.adapter as MobileListAdapter).sortRating()
+            SortingDialogFragment.Sorting.NONE -> {}
+        }
     }
 }

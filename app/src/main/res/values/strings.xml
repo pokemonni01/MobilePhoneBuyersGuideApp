@@ -11,4 +11,7 @@
     <string name="alert_title_error">Error</string>
     <string name="alert_message_cannot_connect_to_server">Cannot connect to server.</string>
     <string name="mock_mobile_brand">Samsung</string>
+    <string name="price_low_to_high">Price low to high</string>
+    <string name="price_high_to_low">Price high to low</string>
+    <string name="rating_5_1">Rating 5-1</string>
 </resources>

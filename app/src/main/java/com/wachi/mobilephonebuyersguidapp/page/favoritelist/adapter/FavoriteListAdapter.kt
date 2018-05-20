@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.list_mobile.view.*
 /**
  * Created by WachiGO on 20/5/2018 AD
  */
-class FavoriteListAdapter(private val mobileList: MutableList<MobileListResponse>) : RecyclerView.Adapter<FavoriteListAdapter.ViewHolder>() {
+class FavoriteListAdapter(private var mobileList: MutableList<MobileListResponse>) : RecyclerView.Adapter<FavoriteListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_mobile, parent, false)
@@ -73,4 +73,19 @@ class FavoriteListAdapter(private val mobileList: MutableList<MobileListResponse
     }
 
     fun getItem(position: Int) = mobileList[position]
+
+    fun sortPriceLowToHigh() {
+        mobileList = mobileList.sortedBy { it.price }.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    fun sortPriceHighToLow() {
+        mobileList = mobileList.sortedByDescending { it.price }.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    fun sortRating() {
+        mobileList = mobileList.sortedByDescending { it.rating }.toMutableList()
+        notifyDataSetChanged()
+    }
 }
