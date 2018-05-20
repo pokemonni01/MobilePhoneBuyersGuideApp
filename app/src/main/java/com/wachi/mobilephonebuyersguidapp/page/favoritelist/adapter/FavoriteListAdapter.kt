@@ -1,4 +1,4 @@
-package com.wachi.mobilephonebuyersguidapp.page.mobilelist.adapter
+package com.wachi.mobilephonebuyersguidapp.page.favoritelist.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,10 +9,11 @@ import com.wachi.mobilephonebuyersguidapp.R
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
 import kotlinx.android.synthetic.main.list_mobile.view.*
 
+
 /**
  * Created by WachiGO on 20/5/2018 AD
  */
-class MobileListAdapter(private val listener: MobileListAdapterListener, private val mobileList: List<MobileListResponse>) : RecyclerView.Adapter<MobileListAdapter.ViewHolder>() {
+class FavoriteListAdapter(private val mobileList: MutableList<MobileListResponse>) : RecyclerView.Adapter<FavoriteListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_mobile, parent, false)
@@ -41,33 +42,35 @@ class MobileListAdapter(private val listener: MobileListAdapterListener, private
             } else {
                 ivFavorite.setImageResource(R.drawable.ic_star_border_black)
             }
-            ivFavorite.setOnClickListener {
-                item.isFavorite = !item.isFavorite
-                if (item.isFavorite) {
-                    ivFavorite.setImageResource(R.drawable.ic_star_black)
-                } else {
-                    ivFavorite.setImageResource(R.drawable.ic_star_border_black)
-                }
-                listener.onFavoriteClick(item, item.isFavorite)
-            }
-            itemView.setOnClickListener {
-                listener.onItemClick(item)
-            }
+            ivFavorite.visibility = View.GONE
         }
     }
 
-    interface MobileListAdapterListener {
-        fun onFavoriteClick(item: MobileListResponse, isFavorite: Boolean)
-        fun onItemClick(item: MobileListResponse)
+    fun addItem(item: MobileListResponse) {
+        for (mobileListResponse in mobileList) {
+            if (mobileListResponse.id == item.id) {
+                return
+            }
+        }
+        mobileList.add(item)
+        notifyDataSetChanged()
     }
 
-    fun clearFavorite(item: MobileListResponse) {
-        mobileList.forEachIndexed { index, mobileListResponse ->
-            if ( mobileListResponse.id == item.id ) {
-                mobileListResponse.isFavorite = false
-                notifyItemChanged(index)
+    fun removeItem(item: MobileListResponse) {
+        val iterator = mobileList.iterator()
+        while (iterator.hasNext()) {
+            if (iterator.next().id == item.id) {
+                iterator.remove()
+                notifyDataSetChanged()
                 return
             }
         }
     }
+
+    fun removeAt(position: Int) {
+        mobileList.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+    fun getItem(position: Int) = mobileList[position]
 }

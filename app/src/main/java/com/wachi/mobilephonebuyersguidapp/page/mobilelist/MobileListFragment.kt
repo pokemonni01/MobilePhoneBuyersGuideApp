@@ -1,7 +1,6 @@
 package com.wachi.mobilephonebuyersguidapp.page.mobilelist
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -56,20 +55,25 @@ class MobileListFragment : BaseFragment(), MobileListContract.View, MobileListAd
     }
 
     override fun onFavoriteClick(item: MobileListResponse, isFavorite: Boolean) {
-
+        mListener?.onFavoriteClick(item, isFavorite)
     }
 
     override fun onItemClick(item: MobileListResponse) {
-
+        mListener?.onItemClick(item)
     }
 
     interface OnMobileListFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
+        fun onFavoriteClick(item: MobileListResponse, isFavorite: Boolean)
+        fun onItemClick(item: MobileListResponse)
     }
 
     companion object {
         fun newInstance(): MobileListFragment {
             return MobileListFragment()
         }
+    }
+
+    fun clearFavorite(item: MobileListResponse) {
+        (recyclerView.adapter as MobileListAdapter).clearFavorite(item)
     }
 }
