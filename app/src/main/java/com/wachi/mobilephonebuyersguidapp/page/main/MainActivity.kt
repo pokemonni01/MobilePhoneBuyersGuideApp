@@ -1,6 +1,6 @@
 package com.wachi.mobilephonebuyersguidapp.page.main
 
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.wachi.mobilephonebuyersguidapp.R
@@ -8,11 +8,16 @@ import com.wachi.mobilephonebuyersguidapp.base.BaseActivity
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
 import com.wachi.mobilephonebuyersguidapp.page.favoritelist.FavoriteListFragment
 import com.wachi.mobilephonebuyersguidapp.page.main.adapter.PageAdapter
+import com.wachi.mobilephonebuyersguidapp.page.mobiledetail.MobileDetailActivity
 import com.wachi.mobilephonebuyersguidapp.page.mobilelist.MobileListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInteractionListener, FavoriteListFragment.OnFavoriteListFragmentInteractionListener {
+
+    companion object {
+        const val MOBILE_ITEM_KEY = "mobile_item"
+    }
 
     private val mobileListFragment = MobileListFragment.newInstance()
     private val favoriteListFragment = FavoriteListFragment.newInstance()
@@ -39,7 +44,9 @@ class MainActivity : BaseActivity(), MobileListFragment.OnMobileListFragmentInte
     }
 
     override fun onItemClick(item: MobileListResponse) {
-
+        val intent = Intent(this, MobileDetailActivity::class.java)
+        intent.putExtra(MOBILE_ITEM_KEY, item)
+        startActivity(intent)
     }
 
     override fun onRemoveFavoriteItem(item: MobileListResponse) {

@@ -10,4 +10,5 @@
     <string name="mock_mobile_name">Moto E4 Plus</string>
     <string name="alert_title_error">Error</string>
     <string name="alert_message_cannot_connect_to_server">Cannot connect to server.</string>
+    <string name="mock_mobile_brand">Samsung</string>
 </resources>
