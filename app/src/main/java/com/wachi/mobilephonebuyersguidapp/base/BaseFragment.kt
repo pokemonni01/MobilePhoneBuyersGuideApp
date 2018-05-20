@@ -10,7 +10,7 @@ import com.wachi.mobilephonebuyersguidapp.util.ProgressBarHandler
 /**
  * Created by WachiGO on 20/5/2018 AD
  */
-class BaseFragment : Fragment(), BaseView {
+open class BaseFragment : Fragment(), BaseView {
 
     private var mProgressBarHandler: ProgressBarHandler? = null
 

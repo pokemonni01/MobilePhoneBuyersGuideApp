@@ -23,5 +23,7 @@ data class MobileListResponse(
 	val brand: String? = null,
 
 	@field:SerializedName("thumbImageURL")
-	val thumbImageURL: String? = null
+	val thumbImageURL: String? = null,
+
+	var isFavorite: Boolean = false
 )
