@@ -36,7 +36,7 @@ class FavoriteListFragment : BaseFragment(), FavoriteListAdapter.FavoriteListAda
                 this.adapter = FavoriteListAdapter(this@FavoriteListFragment, mutableListOf())
             }
 
-            val swipeHandler = object : SwipeToDeleteCallback(this@run) {
+            val swipeHandler = object : SwipeToDeleteCallback() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
                     viewHolder?.run {
                         mListener?.onRemoveFavoriteItem((recyclerView.adapter as FavoriteListAdapter).getItem(viewHolder.adapterPosition))

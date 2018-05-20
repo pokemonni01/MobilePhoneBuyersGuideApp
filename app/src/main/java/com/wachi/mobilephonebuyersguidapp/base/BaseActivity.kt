@@ -1,11 +1,9 @@
 package com.wachi.mobilephonebuyersguidapp.base
 
-import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
-import android.view.inputmethod.InputMethodManager
 import com.wachi.mobilephonebuyersguidapp.R
 import com.wachi.mobilephonebuyersguidapp.base.mvp.BaseView
 import com.wachi.mobilephonebuyersguidapp.util.AppUtil

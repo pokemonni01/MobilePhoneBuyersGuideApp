@@ -2,8 +2,6 @@
     <string name="app_name">Mobile Phone Buyer\'s Guide App</string>
     <string name="ok_button">OK</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="mobile_price">Price: $%1$s</string>
     <string name="mobile_rating">Rating: %1$s</string>
     <string name="mock_mobile_description">First place in our list goes to the excellent Moto E4 Plus. It\'s a cheap phone that features phenomenal battery life, a fingerprint scanner and a premium feel design, plus it\'s a lot cheaper than the Moto G5 below. It is a little limited with its power, but it makes up for it by being able to last for a whole two days from a single charge. If price and battery are the most important features for you, the Moto E4 Plus will suit you perfectly.</string>
@@ -13,5 +11,5 @@
     <string name="mock_mobile_brand">Samsung</string>
     <string name="price_low_to_high">Price low to high</string>
     <string name="price_high_to_low">Price high to low</string>
-    <string name="rating_5_1">Rating 5-1</string>
+    <string name="rating_5_1">Rating 5–1</string>
 </resources>

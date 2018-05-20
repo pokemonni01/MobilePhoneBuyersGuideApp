@@ -26,7 +26,7 @@ class SortingDialogFragment : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId) {
                 R.id.radioPriceLowToHigh -> {
                     if ( mCurrentSorting != Sorting.PRICELOWTOHIGH) {
