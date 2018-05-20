@@ -16,7 +16,7 @@ import com.wachi.mobilephonebuyersguidapp.page.favoritelist.adapter.callback.Swi
 import com.wachi.mobilephonebuyersguidapp.page.main.sortingdialog.SortingDialogFragment
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
 
-class FavoriteListFragment : BaseFragment() {
+class FavoriteListFragment : BaseFragment(), FavoriteListAdapter.FavoriteListAdapterListener {
 
     private var mListener: OnFavoriteListFragmentInteractionListener? = null
 
@@ -33,7 +33,7 @@ class FavoriteListFragment : BaseFragment() {
             recyclerView.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(this@run)
-                this.adapter = FavoriteListAdapter(mutableListOf())
+                this.adapter = FavoriteListAdapter(this@FavoriteListFragment, mutableListOf())
             }
 
             val swipeHandler = object : SwipeToDeleteCallback(this@run) {
@@ -48,6 +48,10 @@ class FavoriteListFragment : BaseFragment() {
             val itemTouchHelper = ItemTouchHelper(swipeHandler)
             itemTouchHelper.attachToRecyclerView(recyclerView)
         }
+    }
+
+    override fun onItemClick(item: MobileListResponse) {
+        mListener?.onItemClick(item)
     }
 
     override fun onAttach(context: Context?) {
@@ -66,6 +70,7 @@ class FavoriteListFragment : BaseFragment() {
 
     interface OnFavoriteListFragmentInteractionListener {
         fun onRemoveFavoriteItem(item: MobileListResponse)
+        fun onItemClick(item: MobileListResponse)
     }
 
     companion object {

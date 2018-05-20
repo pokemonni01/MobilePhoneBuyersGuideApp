@@ -8,8 +8,6 @@ import com.wachi.mobilephonebuyersguidapp.GlideApp
 import com.wachi.mobilephonebuyersguidapp.R
 import com.wachi.mobilephonebuyersguidapp.model.mobilelistresponse.MobileListResponse
 import kotlinx.android.synthetic.main.list_mobile.view.*
-import android.R.attr.data
-import java.util.*
 
 
 /**

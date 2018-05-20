@@ -26,7 +26,7 @@ open class BaseFragment : Fragment(), BaseView {
     }
 
     override fun showProgress() {
-        mProgressBarHandler?.hideProgress()
+        mProgressBarHandler?.showProgress()
     }
 
     override fun showDefaultAlertDialog(title: String, message: String) {
