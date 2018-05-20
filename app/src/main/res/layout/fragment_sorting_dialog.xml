@@ -1,0 +1,28 @@
+<RadioGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/radioGroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_16"
+    tools:context="com.wachi.mobilephonebuyersguidapp.page.main.sortingdialog.SortingDialogFragment">
+
+    <RadioButton
+        android:id="@+id/radioPriceLowToHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_low_to_high" />
+
+    <RadioButton
+        android:id="@+id/radioPriceHighToLow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_high_to_low" />
+
+    <RadioButton
+        android:id="@+id/radioRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rating_5_1" />
+</RadioGroup>
